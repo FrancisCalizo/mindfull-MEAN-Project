@@ -9,18 +9,18 @@ const authRoutes = express.Router();
 
 authRoutes.post('/signup', (req, res, next) => {
     if(!req.body.signUpUsername || !req.body.signUpPassword){
-        res.status(400).json({message: "Please provide both, username and password."});
+        res.status(400).json({message: "Hey There! Please provide a username & password."});
         return;
     }
     User.findOne({ username: req.body.signUpUsername }, (err, userFromDb)=>{
         
         if(err){
-            res.status(500).json({message: "Username check went bad."});
+            res.status(500).json({message: "Something went wrong with the username."});
             return;
         }
 
         if(userFromDb){
-            res.status(400).json({message: "Username taken. Choose another one."});
+            res.status(400).json({message: "Username is Taken! Try another one."});
             return;
         }
 
@@ -33,13 +33,13 @@ authRoutes.post('/signup', (req, res, next) => {
         });
         theUser.save((err)=> {
             if(err){
-                res.status(500).json({message: "Saving user went bad."});
+                res.status(500).json({message: "Saving user went wrong!"});
                 return;
             }
             // Automatically log in user after sign up
             req.login(theUser,(err) => {
                 if(err){
-                    res.status(500).json({message: "Login went bad."});
+                    res.status(500).json({message: "Login went wrong!."});
                     return;
                 }
                 // Clear the encryptedPassword before sending
@@ -71,7 +71,7 @@ authRoutes.post('/login', (req, res, next) => {
         // Login successful, save them in the session.
         req.login(theUser, (err) => {
             if(err){
-                res.status(500).json({message:"Session save went bad."});
+                res.status(500).json({message:"Session save went wrong."});
                 return;
             }
 
