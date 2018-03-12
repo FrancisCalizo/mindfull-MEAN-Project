@@ -29,7 +29,7 @@ authRoutes.post('/signup', (req, res, next) => {
         
         const theUser = new User({
            username: req.body.signUpUsername,
-           encryptedPassword: scrambledPassword 
+           encryptedPassword: scrambledPassword,                 
         });
         theUser.save((err)=> {
             if(err){
