@@ -54,13 +54,13 @@ app.use('/', index);
 
 const authRoutes = require("./routes/auth-routes");
 app.use("/", authRoutes);
+const morningfullRoutes = require("./routes/morningfull-routes");
+app.use("/", morningfullRoutes);
+
 
 // =========================== //
 
-app.use((req, res, next) => {
-  // If no routes match, send them the Angular HTML.
-  res.sendFile(__dirname + "/public/index.html");
-});
+
 
 
 module.exports = app;
