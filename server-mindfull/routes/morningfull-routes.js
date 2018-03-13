@@ -49,7 +49,6 @@ morningRoute.get('/dashboard/morningfull/:id', (req, res, next) => {
   }
   MorningFull.find()
     // retrieve all the info of the owners (needs "ref" in model)
-    // don't retrieve "encryptedPassword" though
     .populate('user', { encryptedPassword: 0 })
     .exec((err, morningFull) => {
       if (err) {
@@ -58,6 +57,38 @@ morningRoute.get('/dashboard/morningfull/:id', (req, res, next) => {
       }
       res.status(200).json(morningFull);
     });
+});
+
+// Update MorningFull Entry
+morningRoute.put('/dashboard/morningfull/:id', (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Log in to update the Morningfull." });
+    return;
+  }
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ message: "Specified id is not valid" });
+      return;
+  }
+
+  const editMorningFull = {
+    date     : req.body.morningDate,
+    // user     : req.user._id,
+    grateful : req.body.morningGrateful,
+    photoURL : req.body.morningPhotoURL,
+    tasks    : req.body.morningTasks,
+    word     : req.body.morningWord
+};
+
+MorningFull.findByIdAndUpdate(req.params.id, editMorningFull, err => {
+  if (err) {
+    res.json(err);
+    return;
+  }
+
+  res.json({
+    message: "Morningfull updated successfully."
+  });
+});
 });
 
 
