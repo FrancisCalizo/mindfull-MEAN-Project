@@ -78,4 +78,43 @@ eveningRoute.get('/dashboard/eveningfull/:id', (req, res, next) => {
     });
 });
 
+// Update EveningFull Entry
+eveningRoute.put('/dashboard/eveningfull/edit/:id', (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Log in to update the Eveningfull." });
+    return;
+  }
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ message: "Specified id is not valid" });
+      return;
+  }
+
+  const editEveningFull = {
+    date            : req.body.eveningDate,
+    // user            : req.user._id,
+    accomplishments : req.body.eveningAccomplishments,
+    learn           : req.body.eveningLearn,
+    different       : req.body.eveningDifferent,
+    rating          : req.body.eveningRating,
+    photoPath       : req.body.eveningPhotoPath,
+    word            : req.body.eveningWord
+  };
+
+    // Upload image
+    // if (req.file) {
+    //     thePhone.image = '/uploads/' + req.file.filename;
+    // }
+
+  EveningFull.findByIdAndUpdate(req.params.id, editEveningFull, err => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+
+    res.json({
+      message: "Eveningfull updated successfully."
+    });
+  });
+});
+
 module.exports = eveningRoute;
