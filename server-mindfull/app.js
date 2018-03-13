@@ -49,14 +49,18 @@ app.use(
 );
 
 // ======== Routes =========== //
+
 const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require("./routes/auth-routes");
 app.use("/", authRoutes);
+
 const morningfullRoutes = require("./routes/morningfull-routes");
 app.use("/", morningfullRoutes);
 
+const eveningfullRoutes = require("./routes/morningfull-routes");
+app.use("/", eveningfullRoutes);
 
 // =========================== //
 
