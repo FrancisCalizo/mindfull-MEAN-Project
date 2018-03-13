@@ -60,7 +60,7 @@ morningRoute.get('/dashboard/morningfull/:id', (req, res, next) => {
 });
 
 // Update MorningFull Entry
-morningRoute.put('/dashboard/morningfull/:id', (req, res, next) => {
+morningRoute.put('/dashboard/morningfull/edit/:id', (req, res, next) => {
   if (!req.user) {
     res.status(401).json({ message: "Log in to update the Morningfull." });
     return;
@@ -77,19 +77,41 @@ morningRoute.put('/dashboard/morningfull/:id', (req, res, next) => {
     photoURL : req.body.morningPhotoURL,
     tasks    : req.body.morningTasks,
     word     : req.body.morningWord
-};
+  };
 
-MorningFull.findByIdAndUpdate(req.params.id, editMorningFull, err => {
-  if (err) {
-    res.json(err);
+  MorningFull.findByIdAndUpdate(req.params.id, editMorningFull, err => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+
+    res.json({
+      message: "Morningfull updated successfully."
+    });
+  });
+});
+
+// delete MorningFull Entry
+morningRoute.delete("/dashboard/morningfull/:id", (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Log in to delete the Morningfull Entry." });
+    return;
+  }
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: "Specified id is not valid." });
     return;
   }
 
-  res.json({
-    message: "Morningfull updated successfully."
+  MorningFull.remove({ _id: req.params.id }, err => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+
+    res.json({
+      message: "Morningfull has been removed."
+    });
   });
 });
-});
-
 
 module.exports = morningRoute;
