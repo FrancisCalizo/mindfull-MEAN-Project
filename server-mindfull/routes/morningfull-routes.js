@@ -47,14 +47,14 @@ morningRoute.get('/dashboard/morningfull/:id', (req, res, next) => {
     res.status(401).json({ message: "Log in to see MorningFulls." });
     return;
   }
-  MorningFull.find()
-    // retrieve all the info of the owners (needs "ref" in model)
-    .populate('user', { encryptedPassword: 0 })
-    .exec((err, morningFull) => {
-      if (err) {
-        res.status(500).json({ message: "Morningfull find went bad." });
-        return;
-      }
+  // Search database by specific morning ID
+  MorningFull.findById(req.params.id, (err, morningFull) => {
+    if (err) {
+      //res.json(err);
+      res.status(500).json({ message: "MorningFull find went bad." });
+      return;
+    }
+
       res.status(200).json(morningFull);
     });
 });

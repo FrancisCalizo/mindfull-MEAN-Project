@@ -53,4 +53,29 @@ eveningRoute.post('/dashboard/eveningfull/new', (req, res, next) => {
   });
 });
 
+// Read eveningFull Single Entry
+eveningRoute.get('/dashboard/eveningfull/:id', (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Log in to see eveningFulls." });
+    return;
+  }
+
+  // Check if Evening ID is valid 
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+
+  // Search database by specific evening ID
+  EveningFull.findById(req.params.id, (err, eveningFull) => {
+    if (err) {
+      //res.json(err);
+      res.status(500).json({ message: "EveningFull find went bad." });
+      return;
+    }
+
+      res.status(200).json(eveningFull);
+    });
+});
+
 module.exports = eveningRoute;
