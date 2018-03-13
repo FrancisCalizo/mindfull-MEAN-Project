@@ -5,7 +5,7 @@ const multer        = require('multer');
 const EveningFull   = require('../models/eveningfull');
 const eveningRoute  = express.Router();
 
-// multer for photo
+// multer for photo upload
 const myUploader = multer({
   dest: __dirname + "/../public/uploads/"
 });
@@ -113,6 +113,29 @@ eveningRoute.put('/dashboard/eveningfull/edit/:id', (req, res, next) => {
 
     res.json({
       message: "Eveningfull updated successfully."
+    });
+  });
+});
+
+// Delete EveningFull Entry 
+eveningRoute.delete("/dashboard/eveningfull/:id", (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Log in to delete the Eveningfull Entry." });
+    return;
+  }
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: "Specified id is not valid." });
+    return;
+  }
+
+  EveningFull.remove({ _id: req.params.id }, err => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+
+    res.json({
+      message: "Eveningfull has been removed."
     });
   });
 });
