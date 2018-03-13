@@ -62,6 +62,9 @@ app.use("/", morningfullRoutes);
 const eveningfullRoutes = require("./routes/eveningfull-routes");
 app.use("/", eveningfullRoutes);
 
+const dashboardRoutes = require("./routes/dashboard-routes");
+app.use("/", dashboardRoutes);
+
 // =========================== //
 
 
