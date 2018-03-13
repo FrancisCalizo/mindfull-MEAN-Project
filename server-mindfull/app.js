@@ -59,7 +59,7 @@ app.use("/", authRoutes);
 const morningfullRoutes = require("./routes/morningfull-routes");
 app.use("/", morningfullRoutes);
 
-const eveningfullRoutes = require("./routes/morningfull-routes");
+const eveningfullRoutes = require("./routes/eveningfull-routes");
 app.use("/", eveningfullRoutes);
 
 // =========================== //
