@@ -23,7 +23,7 @@ dashboardRoute.get('/dashboard', (req, res, next) => {
         res.status(500).json({ message: "Morning find went bad." });
         return;
       } 
-
+      // Able to Access Both Entries on the Dashboard
       const data = {
         morningEntries: morningEntries,
         eveningEntries: eveningEntries
