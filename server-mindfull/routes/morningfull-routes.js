@@ -18,7 +18,7 @@ morningRoute.post('/dashboard/morningfull/new', (req, res, next) => {
       date     : req.body.morningDate,
       user     : req.user._id,
       grateful : req.body.morningGrateful,
-      photoURL : req.body.morningPhotoURL,
+      photoUrl : req.body.morningPhotoUrl,
       tasks    : req.body.morningTasks,
       word     : req.body.morningWord
   });
@@ -74,7 +74,7 @@ morningRoute.put('/dashboard/morningfull/edit/:id', (req, res, next) => {
     date     : req.body.morningDate,
     // user     : req.user._id,
     grateful : req.body.morningGrateful,
-    photoURL : req.body.morningPhotoURL,
+    photoUrl : req.body.morningPhotoUrl,
     tasks    : req.body.morningTasks,
     word     : req.body.morningWord
   };

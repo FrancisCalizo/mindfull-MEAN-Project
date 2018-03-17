@@ -18,7 +18,7 @@ const EveningFullSchema = new Schema ({
     type: String
   }],
   different: String,
-  Rating: Number,
+  rating: Number,
   // This will be a file upload using Multer
   photoPath: String,
   word: String

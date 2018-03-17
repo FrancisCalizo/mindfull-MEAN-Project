@@ -18,7 +18,7 @@ const MorningFullSchema = new Schema ({
     type: String
   }],
   // This will take URL of image
-  photoURL: String,
+  photoUrl: String,
   word: String
 });
 
