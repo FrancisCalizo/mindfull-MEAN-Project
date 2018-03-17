@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 
 const MorningFullSchema = new Schema ({
   date: {
-    type: Date,
+    type: String,
     require: true,
   },
   user: {

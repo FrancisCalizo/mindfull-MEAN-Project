@@ -24,11 +24,11 @@ dashboardRoute.get('/dashboard', (req, res, next) => {
         return;
       } 
       // Able to Access Both Entries on the Dashboard
-      const data = {
+      const entries = {
         morningEntries: morningEntries,
         eveningEntries: eveningEntries
       }
-      res.status(200).json(data);
+      res.status(200).json(entries);
     })
   })
 });
