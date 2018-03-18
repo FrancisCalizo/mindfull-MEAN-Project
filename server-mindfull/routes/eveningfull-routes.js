@@ -12,7 +12,7 @@ const myUploader = multer({
 
 // Create New EveningFull
 // NEED TO FIGURE OUT HOW TO HAVE CALENDAR FUNCTIONALITY //
-eveningRoute.post('/dashboard/eveningfull/new', (req, res, next) => {
+eveningRoute.post('/dashboard/eveningfull/new', myUploader.single('image'), (req, res, next) => {
 
   if (!req.user) {
       res.status(401).json({ errorMessage: 'Not logged in.' });
@@ -32,7 +32,8 @@ eveningRoute.post('/dashboard/eveningfull/new', (req, res, next) => {
 
   // Able to post without Photo Being a Requirement******
   if(req.file){
-    newEveningFull.image = '/uploads' + req.file.filename;
+    console.log("image:", req.file)
+    newEveningFull.image = '/uploads/' + req.file.filename;
   }
 
   newEveningFull.save((err) => {
