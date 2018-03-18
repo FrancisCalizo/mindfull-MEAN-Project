@@ -26,13 +26,13 @@ eveningRoute.post('/dashboard/eveningfull/new', (req, res, next) => {
       learn           : req.body.eveningLearn,
       different       : req.body.eveningDifferent,
       rating          : req.body.eveningRating,
-      photoPath       : req.body.eveningPhotoPath,
+      image           : req.body.eveningImage,
       word            : req.body.eveningWord
   });
 
   // Able to post without Photo Being a Requirement******
   if(req.file){
-    newEveningFull.photoPath = '/uploads' + req.file.filename;
+    newEveningFull.image = '/uploads' + req.file.filename;
   }
 
   newEveningFull.save((err) => {
@@ -96,7 +96,7 @@ eveningRoute.put('/dashboard/eveningfull/edit/:id', (req, res, next) => {
     learn           : req.body.eveningLearn,
     different       : req.body.eveningDifferent,
     rating          : req.body.eveningRating,
-    photoPath       : req.body.eveningPhotoPath,
+    image           : req.body.eveningImage,
     word            : req.body.eveningWord
   };
 
