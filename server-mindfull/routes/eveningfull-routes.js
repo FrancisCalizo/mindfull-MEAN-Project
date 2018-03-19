@@ -100,11 +100,11 @@ eveningRoute.put('/dashboard/eveningfull/edit/:id', (req, res, next) => {
     image           : req.body.eveningImage,
     word            : req.body.eveningWord
   };
-
+  
     // Upload image
-    // if (req.file) {
-    //     thePhone.image = '/uploads/' + req.file.filename;
-    // }
+    if (req.file) {
+        thePhone.image = '/uploads/' + req.file.filename;
+    }
 
   EveningFull.findByIdAndUpdate(req.params.id, editEveningFull, err => {
     if (err) {
