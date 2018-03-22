@@ -9,10 +9,13 @@ const mongoose      = require("mongoose");
 const session       = require('express-session');
 const passport      = require('passport');
 const cors          = require('cors');
-
+require("dotenv").config();
+mongoose.connect(process.env.MONGODB_URI);
 
 // Connect Mongoose to the DB
-mongoose.connect('mongodb://localhost/mindfull');
+// mongoose.connect('mongodb://localhost/mindfull');
+// Connect to Heroku DB
+mongoose.connect("mongodb://localhost/mindfull");
 
 // Passport Setup
 require('./configs/passport-config');
